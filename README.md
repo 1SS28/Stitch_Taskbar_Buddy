@@ -19,17 +19,18 @@ A small Electron desktop pet. A Stitch character sits quietly in the corner of y
 
 ## Running locally
 
-- bash
+```bash
 npm install
 npx electron .
-
+```
 
 ## Building
 
-- bash
+```bash
 npx electron-packager . stitch-TaskbarBuddy --platform=darwin --arch=arm64 --out=dist
+```
 
-(Swap arm64 for x64 or universal depending on target Mac hardware.)
+(Swap `arm64` for `x64` or `universal` depending on target Mac hardware.)
 
 ## Notes
 
