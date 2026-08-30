@@ -1,0 +1,36 @@
+# Stitch TaskbarBuddy
+
+A small Electron desktop pet. A Stitch character sits quietly in the corner of your screen, right above the taskbar, and plays through animations throughout the day. Made as a personal gift.
+
+## Features
+
+- Sits in the corner of the screen, always on top
+- Idle animation loop
+- Multiple animations (idle, jump, fall, hurt, sleepy), right-click/click to switch
+- Automatically switches to a "sleepy" animation late at night
+- Launches automatically on login
+- Stays visible even in fullscreen apps
+
+## Tech stack
+
+- [Electron](https://www.electronjs.org/) : cross-platform desktop app framework
+- HTML5 Canvas for sprite animation
+- Packaged with `electron-packager`
+
+## Running locally
+
+- bash
+npm install
+npx electron .
+
+
+## Building
+
+- bash
+npx electron-packager . stitch-TaskbarBuddy --platform=darwin --arch=arm64 --out=dist
+
+(Swap arm64 for x64 or universal depending on target Mac hardware.)
+
+## Notes
+
+Built as a first Electron project, a learning experience in desktop app windows, canvas animation, and Mac app packaging/permissions quirks.

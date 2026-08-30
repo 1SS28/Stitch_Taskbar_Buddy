@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            html, body {margin: 0; background: transparent; overflow: hidden;}
+            #stitch {width: 80px; image-rendering: pixelated;}
+        </style>
+    </head>
+    <body>
+        <canvas id="stitch" width="80" height="80"></canvas>
+
+        <script>
+            const canvas = document.getElementById('stitch');
+            const ctx = canvas.getContext('2d');
+
+            
+            const animations = {
+                idle: {img: new Image(), frameWidth: 32, frameHeight: 32, totalFrames: 4, timerate: 190},
+                jump: {img: new Image(), frameWidth: 32, frameHeight: 32, totalFrames: 4, timerate: 180},
+                fall: {img: new Image(), frameWidth: 34, frameHeight: 32, totalFrames: 4, timerate: 220},
+                hurt: {img: new Image(), frameWidth: 32, frameHeight: 32, totalFrames: 2, timerate: 200},
+                sleepy: {img: new Image(), frameWidth: 32, frameHeight: 32, totalFrames: 4, timerate: 300}
+            };
+
+            
+            for (const name in animations) {
+                animations[name].img.src = `stitch-${name}.png`;
+            }
+
+            let currentAnimation = 'idle';
+            let currentFrame = 0;
+
+            function animate(){
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const anim = animations[currentAnimation];
+                
+                try{
+                    if (anim.img.complete && anim.img.naturalWidth !== 0) {
+                        ctx.drawImage(anim.img, currentFrame * anim.frameWidth, 0, anim.frameWidth, anim.frameHeight, 0, 0, 80, 80);
+                        currentFrame = (currentFrame + 1) % anim.totalFrames;
+                    }
+                }
+
+                catch (err){
+                    console.error('Draw failed for animation:', currentAnimation, err);
+                }
+
+                setTimeout(() => requestAnimationFrame(animate), anim.timerate);
+            }
+
+            
+            animations.idle.img.onload = animate;
+
+            setInterval(() => {
+                const hour = new Date().getHours();
+                if (hour >= 0 && hour <= 6){
+                    currentAnimation = 'sleepy';
+                    currentFrame = 0;
+                }
+            }, 60000);
+
+            const { ipcRenderer } = require('electron');
+
+            canvas.addEventListener('click', () => {
+                ipcRenderer.send('show-animation-menu');
+            });
+
+            ipcRenderer.on('set-animation', (event, animationName) => {
+                currentAnimation = animationName;
+                currentFrame = 0;
+            });
+        </script>
+    </body>
+</html>
