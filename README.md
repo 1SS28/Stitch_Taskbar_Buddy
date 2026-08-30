@@ -15,7 +15,7 @@ A small Electron desktop pet. A Stitch character sits quietly in the corner of y
 
 - [Electron](https://www.electronjs.org/) : cross-platform desktop app framework
 - HTML5 Canvas for sprite animation
-- Packaged with `electron-packager`
+- Packaged with electron-packager
 
 ## Running locally
 
