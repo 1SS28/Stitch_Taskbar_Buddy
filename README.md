@@ -35,3 +35,7 @@ npx electron-packager . stitch-TaskbarBuddy --platform=darwin --arch=arm64 --out
 ## Notes
 
 Built as a first Electron project, a learning experience in desktop app windows, canvas animation, and Mac app packaging/permissions quirks.
+
+## License
+
+The code is MIT licensed, see [LICENSE](LICENSE). The Stitch sprites (`stitch-*.png`) are fan art of a Disney character and aren't covered by that license. Disney owns Stitch, so don't reuse the sprites commercially.
